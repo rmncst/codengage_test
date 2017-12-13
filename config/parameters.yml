@@ -1,0 +1,15 @@
+connections:
+    con_oltp:
+        ormmetadata: true
+        default: true
+        dbname: 'codengagetestdb'
+        user: 'codengageuser'
+        password: 'coengagepass'
+        host: '127.0.0.1'
+        driver: 'pdo_mysql'
+    con_logger:
+        ormmetadata: false
+        dbname: 'webapi_logger'
+        driver: 'sqlite'
+cli_connection: 'con_oltp'
+secret: '1424112sdfsdf13414dfadf23234dfdsf23234dgfda'

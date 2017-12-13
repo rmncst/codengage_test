@@ -1,0 +1,20 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html lang="pt-br">
+   <head>
+       <meta charset="utf-8"/>
+       <link rel="stylesheet" href="{{ asset('/assets/css/bulma.css') }}" >
+       <title>#DevGiganet FramWork</title>
+   </head>
+   <body>
+       {% block content %}
+        <p>Olá mundo! Você tem uma mensagem</p>
+           <strong><p>{{ message|upper }}</p></strong>
+       {% endblock %}
+        <script src="{{ asset('/assets/js/jquery/jquery.js') }}"></script>
+
+        {% block scripts %}
+
+        {% endblock %}
+   </body>
+</html>

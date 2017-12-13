@@ -1,0 +1,9 @@
+doctrine:
+    orm:
+        metadata_entity_annotation: 'src/Data/Entity'
+        metadata_proxies: 'src/Data/Proxy'
+        entity_namesapace: 'Data\Entity'
+        proxy_namespace: 'Data\Proxy'
+
+    
+    

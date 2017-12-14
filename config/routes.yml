@@ -1,0 +1,62 @@
+routes:
+    home_page:
+        method: 'GET'
+        path_uri: '/'
+        action: 'controller.home:index'
+routes_grouped:
+    person:
+        prefix: '/person'
+        security: true
+        routes:
+            index:
+                method: 'GET'
+                path_uri: ''
+                action: 'controller.person:index'
+            insert:
+                method: 'POST'
+                path_uri: ''
+                action: 'controller.person:insert'
+            edit:
+                method: 'GET'
+                path_uri: '/edit/{id}'
+                action: 'controller.person:edit'
+            remove:
+                method: 'GET'
+                path_uri: '/delete/{id}'
+                action: 'controller.person:delete'
+    product:
+        prefix: '/product'
+        security: true
+        routes:
+            index:
+                method: 'GET'
+                path_uri: ''
+                action: 'controller.product:index'
+            insert:
+                method: 'POST'
+                path_uri: ''
+                action: 'controller.product:insert'
+            edit:
+                method: 'GET'
+                path_uri: '/edit/{id}'
+                action: 'controller.product:edit'
+            remove:
+                method: 'GET'
+                path_uri: '/delete/{id}'
+                action: 'controller.product:delete'
+    sale:
+        prefix: '/sale'
+        security: true
+        routes:
+            index:
+                method: 'GET'
+                path_uri: ''
+                action: 'controller.sale:index'
+            insert:
+                method: 'POST'
+                path_uri: ''
+                action: 'controller.sale:insert'
+            remove:
+                method: 'GET'
+                path_uri: '/delete/{id}'
+                action: 'controller.sale:delete'

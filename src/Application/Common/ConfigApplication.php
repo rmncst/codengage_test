@@ -12,11 +12,9 @@ class ConfigApplication
 {
     const PATH_PARAMETERS = __DIR__."/../../../config/parameters.yml";
     const PATH_PATHS = __DIR__."/../../../config/paths.yml";
-    
-    
+
     const COLUMN_CONNECTIONS = 'connections';
     const COLUMN_CLI_CONNECTION = 'cli_connection';
-    
 
     public static function getRootPathApp()
     {
@@ -30,8 +28,7 @@ class ConfigApplication
 
         return $input;
     }
-    
-    
+
     public static function getPaths()
     {
         $input = file_get_contents(self::PATH_PATHS);
@@ -39,8 +36,7 @@ class ConfigApplication
 
         return $input;
     }
-    
-    
+
     public static function getParametersConnections()
     {
         return self::getParameters()[self::COLUMN_CONNECTIONS];
@@ -84,5 +80,23 @@ class ConfigApplication
     public static function getSecretApp()
     {
         return self::getParameters()['secret'];
+    }
+
+    public static function getControllerRootDirectory()
+    {
+        return self::getRootPathApp().''.self::getPaths()['application']['controller'];
+    }
+
+    public static function getRoutesFilePath()
+    {
+        return self::getRootPathApp().''.self::getPaths()['application']['routes_file'];
+    }
+
+    public static function getRoutesArray()
+    {
+        $input_yaml = file_get_contents(self::getRoutesFilePath());
+        $output = Yaml::parse($input_yaml);
+
+        return $output;
     }
 }

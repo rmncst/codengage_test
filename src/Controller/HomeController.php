@@ -10,16 +10,22 @@ namespace Controller;
 
 
 use Pimple\Container;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Validator\PersonValidator;
 
 class HomeController extends ControllerBase
 {
     public function __construct(Container $app)
     {
         parent::__construct($app);
+        $this->setValidatorBase(PersonValidator::class);
     }
 
     public function index()
     {
-        return $this->render('home/index.twig',['message' => 'home page']);
+        $errors = $this->validateRequest();
+
+
+        return $this->render('master.twig',['message' => 'home page']);
     }
 }

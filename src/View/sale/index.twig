@@ -1,0 +1,101 @@
+{% extends 'master.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mx-auto mt-4">
+                <div class="card-header">Sales</div>
+                <div class="card-body">
+                    <form action="{{ url('sale_insert') }}" method="post" >
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label for="exampleInputName">Select a client</label>
+                                    <select name="client" class="form-control" >
+                                        <option value="">Select an option</option>
+                                        {% for cli in persons %}
+                                            <option value="{{ cli.id }}">{{ cli.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <p class="text-danger" >{{ error_client}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <label for="exampleInputName">Date Sale</label>
+                                    <input type="text" disabled value="{{ date|date() }}" class="form-control">
+                                    <p class="text-danger" >{{ error_code }}</p>
+                                </div>
+                                <div class="col-md-4"> </div>
+                                <div class="col-md-4">
+                                    <label for="exampleInputName">Total Sale</label>
+                                    <input type="text" disabled value="0" class="form-control">
+                                    <p class="text-danger" >{{ error_code }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="items">
+                            <div class="form-group container-item" >
+                                <hr />
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <label for="exampleInputName">Product</label>
+                                        <select name="products[]" required class="form-control" >
+                                            <option value="" >Select an option</option>
+                                            {% for prod in products %}
+                                                <option value="{{ prod.id }}">{{ prod.name }} - {{ prod.unitPrice }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <p class="text-danger" >{{ error_code }}</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="exampleInputName">Count</label>
+                                        <input type="text" name="counts[]" value="1" class="form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="exampleInputName">Discount</label>
+                                        <input type="number" name="discounts[]" value="0" class="form-control">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="exampleInputName">Sub Total</label>
+                                        <input type="text" disabled value="0" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group " >
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="btn-add" >
+                                        Add Item
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                            <br>
+
+                        <button type="submit" class="btn btn-primary btn-block">Save New sale...</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        $(document).ready(function () {
+            $('#btn-add').click(function () {
+                $('.container-item:first').clone().appendTo('#items')
+            })
+        })
+    </script>
+
+{% endblock %}

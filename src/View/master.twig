@@ -1,20 +1,113 @@
-{# empty Twig template #}
 <!DOCTYPE html>
-<html lang="pt-br">
-   <head>
-       <meta charset="utf-8"/>
-       <link rel="stylesheet" href="{{ asset('/assets/css/bulma.css') }}" >
-       <title>#DevGiganet FramWork</title>
-   </head>
-   <body>
-       {% block content %}
-        <p>Olá mundo! Você tem uma mensagem</p>
-           <strong><p>{{ message|upper }}</p></strong>
-       {% endblock %}
-        <script src="{{ asset('/assets/js/jquery/jquery.js') }}"></script>
+<html lang="en">
 
-        {% block scripts %}
+<head>
 
-        {% endblock %}
-   </body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CONDENGAGE@TEST</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('/css/shop-item.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">ramonCosta</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Twitter
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">facebook</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Linkedin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">rmncst@gmail.com</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            <h1 class="my-4">
+                Menu
+            </h1>
+            <div class="list-group" style="min-height: 400px;" >
+                <a href="{{ url('person_index') }}" class="list-group-item">Person</a>
+                <a href="{{ url('product_index') }}" class="list-group-item">Product</a>
+                <a href="{{ url('sale_index') }}" class="list-group-item">Sales</a>
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            {% block content %}
+
+
+            <div class="card card-outline-secondary my-4">
+                <div class="card-header">
+                    My Sales Test
+                </div>
+                <div class="card-body">
+                    <p>
+                        This is a fake app to Codengage test
+                    </p>
+                    <small class="text-muted">Posted by Ramon Costa on 14/12/17</small>
+                    <hr>
+                </div>
+            </div>
+            <!-- /.card -->
+
+            {% endblock %}
+            <br>
+        </div>
+        <!-- /.col-lg-9 -->
+    </div>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Processo Seletivo Codengage 2017</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ asset('/assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('/assets/js/bootstrap.bundle.min.js') }}"></script>
+
+{% block scripts %}
+
+{% endblock %}
+</body>
+
 </html>

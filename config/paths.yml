@@ -4,6 +4,11 @@ doctrine:
         metadata_proxies: 'src/Data/Proxy'
         entity_namesapace: 'Data\Entity'
         proxy_namespace: 'Data\Proxy'
+application:
+    controller: 'src/Controller'
+    controller_namespace: 'Controller'
+    routes_file: 'config/routes.yml'
+
 
     
     

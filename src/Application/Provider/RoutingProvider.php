@@ -1,50 +1,55 @@
 <?php
 
 namespace Application\Provider;
-use Controller\HomeController;
+
+use Application\Common\ConfigApplication;
 use Pimple\Container;
+use Pimple\ServiceProviderInterface;
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Description of RoutingProvider
  *
  * @author rmncst
  */
-class RoutingProvider implements \Pimple\ServiceProviderInterface 
+class RoutingProvider implements ServiceProviderInterface
 {    
     
     public function register(Container $app)
     {
-        $this->registerServices($app);
-
-
-
-        $app->get('/login','controller.autenticate:login');
-        $app->post('/login_auth','controller.autenticate:loginAutenticate');
-
-        $app->get('/','controller.home:index');
+        $this->registerRoutesFromFile($app);
     }
-    
-    public function crudRoutes(Container $app , $controller, $prefix)
-    {
-        $app->get($prefix,$controller.':index');
-        $app->get($prefix.'/{id}' , $controller.':get');
-        $app->post($prefix ,$controller.':save');
-        $app->post($prefix.'/{id}', $controller.':update');
-        $app->get($prefix.'/{id}', $controller.':delete');
-    }
-    
-    public function registerServices(Container $app)
-    {
-        $app['controller.autenticate'] = function () use($app)
-        {
-            return new \Controller\AutenticateController($app);
-        };
 
-        $app['controller.home'] = function () use($app)
-        {
-            return new HomeController($app);
-        };
 
+    public function registerRoutesFromFile(Application $app)
+    {
+        $routes = ConfigApplication::getRoutesArray();
+
+        foreach ($routes['routes'] as $key => $val)
+        {
+            $app->match($val['path_uri'],$val['action'])
+                ->method($val['method'])
+                ->bind($key);
+        }
+
+        foreach ($routes['routes_grouped'] as $key => $val)
+        {
+            $prefix = $val['prefix'];
+            $name = $key;
+
+            foreach ($val['routes'] as $subkey => $subval)
+            {
+                $method = $subval['method'];
+
+                $app->match($prefix.''.$subval['path_uri'], $subval['action'])
+                    ->method($method)
+                    ->before(function (Request $request, Application $application){
+                        // do something
+                    })
+                    ->bind($name.'_'.$subkey);
+            }
+        }
     }
     
     

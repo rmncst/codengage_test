@@ -3,6 +3,7 @@
 namespace Data\Entity;
 
 use Data\Common\TraitAudit;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +56,17 @@ class Sale
     * @ORM\Column(name="total", type="decimal", precision=10 , scale=2 ,  nullable=false)
     */
     private $total;
+
+    /**
+     * @ORM\OneToMany(targetEntity="SaleItem", mappedBy="sale")
+     */
+    private $items;
+
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
 
     use TraitAudit;
@@ -131,7 +143,7 @@ class Sale
     /**
      * Get total
      *
-     * @return string 
+     * @return float
      */
     public function getTotal()
     {
@@ -251,5 +263,38 @@ class Sale
     public function getClient()
     {
         return $this->client;
+    }
+
+    /**
+     * Add items
+     *
+     * @param \Data\Entity\SaleItem $items
+     * @return Sale
+     */
+    public function addItem(\Data\Entity\SaleItem $items)
+    {
+        $this->items[] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param \Data\Entity\SaleItem $items
+     */
+    public function removeItem(\Data\Entity\SaleItem $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

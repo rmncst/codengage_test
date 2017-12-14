@@ -1,0 +1,64 @@
+{% extends 'master.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mx-auto mt-4">
+                <div class="card-header">Products</div>
+                <div class="card-body">
+                    <form action="{{ url('product_insert') }}" method="post" >
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-2">
+                                    <label for="exampleInputName">Code</label>
+                                    <input class="form-control" type="text" value="{{ product.code }}" name="code" placeholder="#001928">
+                                    <p class="text-danger" >{{ error_code }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputName">Name</label>
+                                    <input class="form-control" type="text" value="{{ product.name }}" name="name" placeholder="Enter name">
+                                    <p class="text-danger" >{{ error_name }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="exampleInputLastName">Unit Price</label>
+                                    <input class="form-control" value="{{ product.unitPrice }}" name="unitPrice" type="text" />
+                                    <p class="text-danger" >{{ error_unitPrice }}</p>
+                                </div>
+                                <input type="hidden" name="id" value="{{ product.id }}" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Save New Product...</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card mx-auto mt-4">
+                <div class="card-header">All Products</div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Unit Price</th>
+                            <th style="text-align: right" >Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.code }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.unitPrice }}</td>
+                                <td style="text-align: right" >
+                                    <a href="{{ url('product_edit', { id : product.id }) }}" class="btn btn-sm btn-primary  p ull-right ">Edit</a>
+                                    <a href="{{ url('product_remove', { id : product.id }) }}" class="btn btn-sm btn-danger pull-right">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

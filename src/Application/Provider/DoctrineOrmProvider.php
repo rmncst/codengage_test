@@ -2,7 +2,9 @@
 namespace Application\Provider;
 
 use Application\Common\ConfigApplication;
+use Data\Event\UpdateTotalSaleEvent;
 use Data\Repository\CustomRepositoryBase;
+use Doctrine\Common\EventManager;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -82,6 +84,9 @@ class DoctrineOrmProvider extends ProviderBase implements ServiceProviderInterfa
         $config->setDefaultRepositoryClassName(CustomRepositoryBase::class);
         $config->setProxyDir(ConfigApplication::getPathMetadataProxy());
         $config->setProxyNamespace(ConfigApplication::getProxyNamespace());
+
+        $eventManager = new EventManager();
+        $eventManager->addEventSubscriber(new UpdateTotalSaleEvent());
         
         $entityManager= EntityManager::create($connection, $config);
         

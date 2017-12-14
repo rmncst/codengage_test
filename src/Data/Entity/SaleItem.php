@@ -3,6 +3,7 @@
 namespace Data\Entity;
 
 use Data\Common\TraitAudit;
+use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,9 +49,9 @@ class SaleItem
     /**
      * @var
      *
-     * @ORM\Column(name="count", type="integer", nullable=false, options={"unsigned":true})
+     * @ORM\Column(name="count", type="integer", nullable=false)
      */
-    private $count;
+    private $count = 1;
 
     /**
      * @var
@@ -62,11 +63,27 @@ class SaleItem
     /**
      * @var
      *
+     * @ORM\Column(name="percent_discount", type="decimal", precision=10 , scale=2 , nullable=false)
+     */
+    private $percentDiscount = 0;
+
+    /**
+     * @var
+     *
      * @ORM\Column(name="total", type="decimal", precision=10 , scale=2 , nullable=false)
      */
     private $total;
 
     use TraitAudit;
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTotal()
+    {
+        $this->total = ($this->count * $this->unitPrice) * (1 - $this->percentDiscount);
+    }
 
     /**
      * Get id
@@ -86,6 +103,11 @@ class SaleItem
      */
     public function setCount($count)
     {
+        if(!($count > 0))
+        {
+            throw new InvalidArgumentException('this value must be greater than 0');
+        }
+
         $this->count = $count;
 
         return $this;
@@ -109,6 +131,11 @@ class SaleItem
      */
     public function setUnitPrice($unitPrice)
     {
+        if(!($unitPrice > 0))
+        {
+            throw new InvalidArgumentException('this value must be greater than 0');
+        }
+
         $this->unitPrice = $unitPrice;
 
         return $this;
@@ -125,25 +152,14 @@ class SaleItem
     }
 
     /**
-     * Set total
-     *
-     * @param string $total
-     * @return SaleItem
-     */
-    public function setTotal($total)
-    {
-        $this->total = $total;
-
-        return $this;
-    }
-
-    /**
      * Get total
      *
-     * @return string 
+     * @return float
      */
     public function getTotal()
     {
+        $this->updateTotal();
+
         return $this->total;
     }
 
@@ -191,5 +207,138 @@ class SaleItem
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return SaleItem
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return SaleItem
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updateBy
+     *
+     * @param string $updateBy
+     * @return SaleItem
+     */
+    public function setUpdateBy($updateBy)
+    {
+        $this->updateBy = $updateBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updateBy
+     *
+     * @return string 
+     */
+    public function getUpdateBy()
+    {
+        return $this->updateBy;
+    }
+
+    /**
+     * Set updateAt
+     *
+     * @param \DateTime $updateAt
+     * @return SaleItem
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
+    }
+
+    /**
+     * Set percentDiscount
+     *
+     * @param float $percentDiscount
+     * @return SaleItem
+     */
+    public function setPercentDiscount($percentDiscount)
+    {
+        if($percentDiscount > 1 || $percentDiscount < 0)
+        {
+            throw new InvalidArgumentException('this value must be between 0 and 1');
+        }
+
+        $this->percentDiscount = $percentDiscount;
+
+        return $this;
+    }
+
+    /**
+     * Get percentDiscount
+     *
+     * @return string 
+     */
+    public function getPercentDiscount()
+    {
+        return $this->percentDiscount;
+    }
+
+    /**
+     * Set total
+     *
+     * @param string $total
+     * @return SaleItem
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
     }
 }

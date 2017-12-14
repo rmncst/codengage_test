@@ -20,7 +20,7 @@ trait TraitAudit
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     * @ORM\Column(name="created_at", type="datetime", nullable=true, options={"default":"CURRENT_TIMESTAMP"})
      */
     private $createdAt;
 
@@ -37,4 +37,21 @@ trait TraitAudit
      * @ORM\Column(name="alterado_em", type="datetime", nullable=true)
      */
     private $updateAt;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function created()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updated()
+    {
+        $this->updateAt = new \DateTime();
+    }
+
 }

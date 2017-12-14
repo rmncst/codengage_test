@@ -47,6 +47,8 @@ class Product
      */
     private $unitPrice;
 
+    use TraitAudit;
+
     /**
      * Get id
      *
@@ -124,5 +126,97 @@ class Product
     public function getUnitPrice()
     {
         return $this->unitPrice;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return Product
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Product
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updateBy
+     *
+     * @param string $updateBy
+     * @return Product
+     */
+    public function setUpdateBy($updateBy)
+    {
+        $this->updateBy = $updateBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updateBy
+     *
+     * @return string 
+     */
+    public function getUpdateBy()
+    {
+        return $this->updateBy;
+    }
+
+    /**
+     * Set updateAt
+     *
+     * @param \DateTime $updateAt
+     * @return Product
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
     }
 }

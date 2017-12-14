@@ -15,6 +15,7 @@ use Pimple\ServiceProviderInterface;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class ApplicationProvider extends ProviderBase implements ServiceProviderInterface
 {
@@ -27,8 +28,9 @@ class ApplicationProvider extends ProviderBase implements ServiceProviderInterfa
         $app->register(new DoctrineOrmProvider());
         $app->register(new ServiceControllerServiceProvider());
         $app->register(new RoutingProvider());
+        $app->register(new ControllerServiceProvider());
         $app->register(new TwigServiceProvider(), ['twig.path' => ConfigApplication::getPathView()]);
-        $app->register(new SilexCustomErrorProvider());
         $app->register(new AssetServiceProvider());
+        $app->register(new ResponseProvider());
     }
 }

@@ -34,6 +34,12 @@ class PersonController extends ControllerBase
         return $this->render('person/index', ['persons' => $this->_repo->findAll()]);
     }
 
+    public function search()
+    {
+        return $this->render('person/index', ['persons' => $this->_repo->search($this->getQueryParam('filter')),
+            'filter' => $this->getQueryParam('filter') ]);
+    }
+
     public function insert()
     {
         $errors = $this->validateRequest();

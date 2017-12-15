@@ -2,6 +2,7 @@
 
 namespace Data\Repository;
 
+use Data\Entity\Person;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class PersonRepository extends EntityRepository
 {
+    public function search($filter = null)
+    {
+        $dql = $this->_em->createQuery('SELECT p FROM '.Person::class.' p WHERE p.name like :name or p.birthDate = :birthDate');
+        $dql->setParameter('name','%'.$filter.'%');
+        $dql->setParameter('birthDate',$filter);
+
+        return $dql->execute();
+    }
 }

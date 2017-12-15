@@ -12,6 +12,10 @@ routes_grouped:
                 method: 'GET'
                 path_uri: ''
                 action: 'controller.person:index'
+            search:
+                method: 'GET'
+                path_uri: '/search'
+                action: 'controller.person:search'
             insert:
                 method: 'POST'
                 path_uri: ''
@@ -32,6 +36,10 @@ routes_grouped:
                 method: 'GET'
                 path_uri: ''
                 action: 'controller.product:index'
+            search:
+                method: 'GET'
+                path_uri: '/search'
+                action: 'controller.product:search'
             insert:
                 method: 'POST'
                 path_uri: ''
@@ -56,6 +64,18 @@ routes_grouped:
                 method: 'POST'
                 path_uri: ''
                 action: 'controller.sale:insert'
+            list:
+                method: 'GET'
+                path_uri: '/list'
+                action: 'controller.sale:listSales'
+            search:
+                method: 'GET'
+                path_uri: '/list/search'
+                action: 'controller.sale:listSalesSearch'
+            get-item-sale:
+                method: 'GET'
+                path_uri: '/item-sale'
+                action: 'controller.sale:getItemSale'
             remove:
                 method: 'GET'
                 path_uri: '/delete/{id}'

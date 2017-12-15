@@ -31,43 +31,14 @@
                                 <div class="col-md-4"> </div>
                                 <div class="col-md-4">
                                     <label for="exampleInputName">Total Sale</label>
-                                    <input type="text" disabled value="0" class="form-control">
+                                    <input type="text" id="total-sale" disabled value="0" class="form-control">
                                     <p class="text-danger" >{{ error_code }}</p>
                                 </div>
                             </div>
                         </div>
                         <div id="items">
-                            <div class="form-group container-item" >
-                                <hr />
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <label for="exampleInputName">Product</label>
-                                        <select name="products[]" required class="form-control" >
-                                            <option value="" >Select an option</option>
-                                            {% for prod in products %}
-                                                <option value="{{ prod.id }}">{{ prod.name }} - {{ prod.unitPrice }}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <p class="text-danger" >{{ error_code }}</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="exampleInputName">Count</label>
-                                        <input type="text" name="counts[]" value="1" class="form-control">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="exampleInputName">Discount</label>
-                                        <input type="number" name="discounts[]" value="0" class="form-control">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="exampleInputName">Sub Total</label>
-                                        <input type="text" disabled value="0" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-
+                            {#Content put here#}
                         </div>
-
                         <div class="form-group " >
                             <div class="form-row">
                                 <div class="col-md-6">
@@ -77,8 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                            <br>
-
+                        <br>
                         <button type="submit" class="btn btn-primary btn-block">Save New sale...</button>
                     </form>
                 </div>
@@ -92,10 +62,67 @@
 
     <script>
         $(document).ready(function () {
+            addItemSale();
+            
             $('#btn-add').click(function () {
-                $('.container-item:first').clone().appendTo('#items')
+                addItemSale();
             })
+
+            bindEventSelectProducts();
         })
+
+
+        function addItemSale() {
+
+            $.ajax({
+                url:'/sale/item-sale',
+                method: 'GET',
+                success: function(data){
+                    $(data).appendTo('#items');
+                    bindEventSelectProducts();
+                }
+            });
+        }
+
+        function bindEventSelectProducts() {
+
+            $('.select-item').change(function () {
+                var id = $(this).prop('id');
+                var value = $(this).val();
+                var optId = '#opt-' + id + '-' + value;
+                var unitPrice = $(optId).attr('data-price');
+                //$('#subtotal-' + id).val(unitPrice);
+
+                updateSubTotal(id,unitPrice);
+                console.log(unitPrice);
+            })
+
+            $('.item-count').blur(function () {
+                var hash = $(this).attr('data-hash');
+                $('#' + hash).trigger('change')
+            })
+
+            $('.item-discount').blur(function () {
+                var hash = $(this).attr('data-hash');
+                $('#' + hash).trigger('change')
+            })
+        }
+        
+        function updateSubTotal(hash, unitPrice) {
+            var count = $('#count-' + hash).val();
+            var discount = $('#discount-' + hash).val();
+            discount = discount / 100;
+            $('#subtotal-' + hash).val(count * unitPrice * (1 - discount));
+            updateTotal();
+        }
+
+        function updateTotal() {
+            var total = 0;
+            $('.item-subtotal').each(function () {
+                total += parseFloat($(this).val());
+            })
+            $('#total-sale').val(total);
+        }
     </script>
 
 {% endblock %}

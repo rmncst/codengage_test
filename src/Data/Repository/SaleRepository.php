@@ -46,4 +46,21 @@ class SaleRepository extends EntityRepository
         $sql->execute();
         return $sql->fetchAll(\PDO::FETCH_ASSOC)[0]['NUMBER'];
     }
+
+    public function search($filter = null)
+    {
+        $dql = $this->_em->createQuery('SELECT s FROM '.Sale::class.' s 
+            JOIN s.client p
+        WHERE p.name like :name 
+              or s.date = :date
+              or s.total like :total
+              or s.number = :number
+        ');
+        $dql->setParameter('name','%'.$filter.'%');
+        $dql->setParameter('date',$filter);
+        $dql->setParameter('total','%'.$filter.'%');
+        $dql->setParameter('number', $filter);
+
+        return $dql->execute();
+    }
 }

@@ -115,7 +115,7 @@ class ControllerBase
 
     public function getQueryParam($param)
     {
-        return $this->_currentRequest->request->get($param);
+        return $this->_currentRequest->query->get($param);
     }
 
     public function abort($statusCode, $message)

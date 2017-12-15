@@ -2,6 +2,7 @@
 
 namespace Data\Repository;
 
+use Data\Entity\Product;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function search($filter = null)
+    {
+        $dql = $this->_em->createQuery('SELECT p FROM '.Product::class.' p 
+        WHERE p.name like :name 
+            or p.code like :code 
+            or p.unitPrice like :unitPrice');
+
+
+        $dql->setParameter('name','%'.$filter.'%');
+        $dql->setParameter('code','%'.$filter.'%');
+        $dql->setParameter('unitPrice','%'.$filter.'%');
+
+        return $dql->execute();
+    }
 }

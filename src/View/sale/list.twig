@@ -1,0 +1,103 @@
+{% extends 'master.twig' %}
+
+{% block content %}
+
+    <br>
+    <form action="{{ url('sale_search') }}" method="get" >
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-10">
+                    <input class="form-control" type="text" value="{{ filter }}"
+                           name="filter"
+                           placeholder="Enter client, date, number or total">
+                    <p class="text-danger" >{{ error_name }}</p>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Pesquisar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% for sale in sales %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mx-auto mt-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-4">
+                                Sale:
+                                <strong>
+                                        {{ sale.number }} - {{ sale.dateSale|date('Y-m-d') }}
+                                </strong>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                Client: <strong>{{ sale.client.name }}</strong>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                Total: <strong> R$ {{ sale.total }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped" >
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Count</th>
+                                    <th>Prince</th>
+                                    <th>Discount</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            {% for item in sale.items %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.count }}</td>
+                                    <td>{{ item.unitPrice }}</td>
+                                    <td>{{ item.percentDiscount * 100 }}%</td>
+                                    <td>R$ {{ item.total }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <a href="{{ url('sale_remove',{ id: sale.id }) }}" type="submit" class="btn btn-danger  btn-block">Delete</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{#<div class="row">#}
+    {#<div class="col-md-12">#}
+        {#<div class="card mx-auto mt-4">#}
+            {#<div class="card-header">All Products</div>#}
+            {#<div class="card-body">#}
+                {#<table class="table table-bordered table-striped">#}
+                    {#<thead>#}
+                    {#<tr>#}
+                        {#<th>Code</th>#}
+                        {#<th>Name</th>#}
+                        {#<th>Unit Price</th>#}
+                        {#<th style="text-align: right" >Actions</th>#}
+                    {#</tr>#}
+                    {#</thead>#}
+                    {#<tbody>#}
+                    {#{% for sale in sales %}#}
+                        {#<tr>#}
+                            {#<td>{{ sale.number }}</td>#}
+                            {#<td>{{ sale.client.name }}</td>#}
+                            {#<td>{{ sale.total }}</td>#}
+                            {#<td style="text-align: right" >#}
+                                {#<a href="{{ url('product_edit', { id : sale.id }) }}" class="btn btn-sm btn-primary  p ull-right ">Edit</a>#}
+                                {#<a href="{{ url('product_remove', { id : sale.id }) }}" class="btn btn-sm btn-danger pull-right">Delete</a>#}
+                            {#</td>#}
+                        {#</tr>#}
+                    {#{% endfor %}#}
+                    {#</tbody>#}
+                {#</table>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+{#</div>#}
+
+{% endblock %}

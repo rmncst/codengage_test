@@ -1,0 +1,32 @@
+
+
+<div class="form-group container-item" >
+    <hr />
+    <div class="form-row">
+        <div class="col-md-6">
+            <label for="exampleInputName">Product</label>
+            <select name="products[]" required class="form-control select-item" id="{{ hash }}" >
+                <option value="" >Select an option</option>
+                {% for prod in products %}
+                    <option id="opt-{{ hash }}-{{ prod.id }}" data-price="{{ prod.unitPrice }}" value="{{ prod.id }}">
+                        {{ prod.name }} - {{ prod.unitPrice }}
+                    </option>
+                {% endfor %}
+            </select>
+            <p class="text-danger" >{{ error_code }}</p>
+        </div>
+        <div class="col-md-2">
+            <label for="exampleInputName">Count</label>
+            <input type="text" name="counts[]" data-hash="{{ hash }}" id="count-{{ hash }}" value="1" class="form-control item-count">
+        </div>
+        <div class="col-md-2">
+            <label for="exampleInputName">Discount</label>
+            <input type="number" id="discount-{{ hash }}" data-hash="{{ hash }}" name="discounts[]" value="0" class="form-control item-discount">
+        </div>
+        <div class="col-md-2">
+            <label for="exampleInputName">Sub Total</label>
+            <input type="text" id="subtotal-{{ hash }}" disabled value="0" class="form-control item-subtotal">
+        </div>
+    </div>
+</div>
+

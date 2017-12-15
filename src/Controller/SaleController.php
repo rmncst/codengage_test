@@ -51,6 +51,15 @@ class SaleController extends ControllerBase
         return $this->render('sale/index',$this->getParamsSale());
     }
 
+    public function listSales()
+    {
+        return $this->render('sale/list',['sales' => $this->_repo->findBy([],['number' => 'ASC'])]);
+    }
+    public function listSalesSearch()
+    {
+        return $this->render('sale/list',['sales' => $this->_repo->search($this->getQueryParam('filter'))]);
+    }
+
     public function insert()
     {
         $errors = $this->validateRequest();
@@ -92,12 +101,38 @@ class SaleController extends ControllerBase
         return $this->redirectToRoute('sale_index');
     }
 
+    public function delete($id)
+    {
+        $sale = $this->_repo->find($id);
+
+        if($sale == null)
+        {
+            return $this->redirectToRoute('sale_list');
+        }
+
+        foreach ($sale->getItems() as $item)
+        {
+            $this->remove($item, false);
+        }
+
+        $this->remove($sale);
+        return $this->redirectToRoute('sale_list');
+    }
+
     public function getParamsSale()
     {
         $return['persons'] = $this->_repoPerson->findAll();
         $return['products'] = $this->_repoProduct->findAll();
 
         return $return;
+    }
+
+    public function getItemSale()
+    {
+        $return['products'] = $this->_repoProduct->findAll();
+        $return['hash'] = uniqid();
+
+        return $this->render('sale/item-sale',$return);
     }
 
 }

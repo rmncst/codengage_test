@@ -4,6 +4,7 @@
 namespace Data\Entity;
 
 use Data\Common\TraitAudit;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,7 +23,7 @@ class Product
     * @ORM\Column(name="id", type="string", length=24, nullable=false)
     * @ORM\Id
     * @ORM\GeneratedValue(strategy="CUSTOM")
-    * @ORM\CustomIdGenerator(class="Data\Common\CustomUUIDGenerator")
+    * @ORM\CustomIdGenerator(class="Data\Common\UUIDGeneratorCommon")
     */
     private $id;
 
@@ -47,7 +48,21 @@ class Product
      */
     private $unitPrice;
 
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="SaleItem", mappedBy="product")
+     */
+    private $saleItems;
+
     use TraitAudit;
+
+    public function __construct()
+    {
+        $this->saleItems = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -218,5 +233,38 @@ class Product
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Add saleItems
+     *
+     * @param \Data\Entity\SaleItem $saleItems
+     * @return Product
+     */
+    public function addSaleItem(\Data\Entity\SaleItem $saleItems)
+    {
+        $this->saleItems[] = $saleItems;
+
+        return $this;
+    }
+
+    /**
+     * Remove saleItems
+     *
+     * @param \Data\Entity\SaleItem $saleItems
+     */
+    public function removeSaleItem(\Data\Entity\SaleItem $saleItems)
+    {
+        $this->saleItems->removeElement($saleItems);
+    }
+
+    /**
+     * Get saleItems
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSaleItems()
+    {
+        return $this->saleItems;
     }
 }

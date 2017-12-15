@@ -23,25 +23,23 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ramonCosta</a>
+        <a class="navbar-brand" href="{{ url('home_page') }}">ramonCosta</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Twitter
-                        <span class="sr-only">(current)</span>
-                    </a>
+                    <a class="nav-link"  href="https://twitter.com/rmncst">Twitter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">facebook</a>
+                    <a class="nav-link" href="https://www.facebook.com/">facebook</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Linkedin</a>
+                    <a class="nav-link" href="https://www.linkedin.com/in/ramon-costa-5181315b/">Linkedin</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">rmncst@gmail.com</a>
+                    <a class="nav-link" href="mailto:rmncst16@gmail.com">rmncst16@gmail.com</a>
                 </li>
             </ul>
         </div>
@@ -60,7 +58,7 @@
             <div class="list-group" style="min-height: 400px;" >
                 <a href="{{ url('person_index') }}" class="list-group-item">Person</a>
                 <a href="{{ url('product_index') }}" class="list-group-item">Product</a>
-                <a href="{{ url('sale_index') }}" class="list-group-item">New Sales</a>
+                <a href="{{ url('sale_index') }}" class="list-group-item">New Sale</a>
                 <a href="{{ url('sale_list') }}" class="list-group-item">All Sales</a>
             </div>
         </div>
@@ -86,14 +84,32 @@
             <!-- /.card -->
 
             {% endblock %}
-            <br>
+            {% for alert in app.session.flashbag.get('success') %}
+                <hr>
+                <div class="alert alert-success">
+                    <p class="text-success">
+                        {{ alert }}
+                    </p>
+                </div>
+                <br>
+            {% endfor %}
+            {% for alert in app.session.flashbag.get('danger') %}
+                <hr>
+                <div class="alert alert-danger">
+                    <p class="text-danger">
+                        {{ alert }}
+                    </p>
+                </div>
+                <br>
+            {% endfor %}
+
         </div>
         <!-- /.col-lg-9 -->
     </div>
 
 </div>
 <!-- /.container -->
-
+<hr>
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">

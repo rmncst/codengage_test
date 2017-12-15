@@ -64,10 +64,10 @@ class SaleItem extends \Data\Entity\SaleItem implements \Doctrine\ORM\Proxy\Prox
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'sale', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'product', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'count', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'unitPrice', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'total'];
+            return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'sale', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'product', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'count', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'unitPrice', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'percentDiscount', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'total', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'updateAt'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'sale', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'product', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'count', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'unitPrice', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'total'];
+        return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'sale', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'product', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'count', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'unitPrice', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'percentDiscount', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'total', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\SaleItem' . "\0" . 'updateAt'];
     }
 
     /**
@@ -173,4 +173,272 @@ class SaleItem extends \Data\Entity\SaleItem implements \Doctrine\ORM\Proxy\Prox
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function updateTotal()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'updateTotal', []);
+
+        return parent::updateTotal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return  parent::getId();
+        }
+
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
+
+        return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCount($count)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCount', [$count]);
+
+        return parent::setCount($count);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCount()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCount', []);
+
+        return parent::getCount();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUnitPrice($unitPrice)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUnitPrice', [$unitPrice]);
+
+        return parent::setUnitPrice($unitPrice);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUnitPrice()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUnitPrice', []);
+
+        return parent::getUnitPrice();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTotal()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTotal', []);
+
+        return parent::getTotal();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSale(\Data\Entity\Sale $sale)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSale', [$sale]);
+
+        return parent::setSale($sale);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSale()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSale', []);
+
+        return parent::getSale();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProduct(\Data\Entity\Product $product)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProduct', [$product]);
+
+        return parent::setProduct($product);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProduct()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProduct', []);
+
+        return parent::getProduct();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedBy($createdBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedBy', [$createdBy]);
+
+        return parent::setCreatedBy($createdBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedBy', []);
+
+        return parent::getCreatedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedAt($createdAt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedAt', [$createdAt]);
+
+        return parent::setCreatedAt($createdAt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedAt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedAt', []);
+
+        return parent::getCreatedAt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdateBy($updateBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdateBy', [$updateBy]);
+
+        return parent::setUpdateBy($updateBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdateBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdateBy', []);
+
+        return parent::getUpdateBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdateAt($updateAt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdateAt', [$updateAt]);
+
+        return parent::setUpdateAt($updateAt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdateAt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdateAt', []);
+
+        return parent::getUpdateAt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPercentDiscount($percentDiscount)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPercentDiscount', [$percentDiscount]);
+
+        return parent::setPercentDiscount($percentDiscount);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPercentDiscount()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPercentDiscount', []);
+
+        return parent::getPercentDiscount();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTotal($total)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTotal', [$total]);
+
+        return parent::setTotal($total);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function created()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'created', []);
+
+        return parent::created();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function updated()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'updated', []);
+
+        return parent::updated();
+    }
+
 }

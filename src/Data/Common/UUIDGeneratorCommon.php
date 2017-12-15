@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: rmncst
- * Date: 12/12/17
- * Time: 21:29
+ * Date: 15/12/17
+ * Time: 18:05
  */
 
 namespace Data\Common;
@@ -12,7 +12,7 @@ namespace Data\Common;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 
-class CustomUUIdGenerator extends AbstractIdGenerator
+class UUIDGeneratorCommon extends AbstractIdGenerator
 {
 
     /**

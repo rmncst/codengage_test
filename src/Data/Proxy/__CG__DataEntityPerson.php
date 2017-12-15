@@ -64,10 +64,10 @@ class Person extends \Data\Entity\Person implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'birthDate', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateAt'];
+            return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'birthDate', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'sales', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateAt'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'birthDate', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateAt'];
+        return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'birthDate', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'sales', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\Person' . "\0" . 'updateAt'];
     }
 
     /**
@@ -318,6 +318,61 @@ class Person extends \Data\Entity\Person implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdateAt', []);
 
         return parent::getUpdateAt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addSale(\Data\Entity\Sale $sales)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addSale', [$sales]);
+
+        return parent::addSale($sales);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeSale(\Data\Entity\Sale $sales)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeSale', [$sales]);
+
+        return parent::removeSale($sales);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSales()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSales', []);
+
+        return parent::getSales();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function created()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'created', []);
+
+        return parent::created();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function updated()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'updated', []);
+
+        return parent::updated();
     }
 
 }

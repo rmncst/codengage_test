@@ -64,10 +64,10 @@ class Product extends \Data\Entity\Product implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'code', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'unitPrice'];
+            return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'code', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'unitPrice', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'updateAt'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'code', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'unitPrice'];
+        return ['__isInitialized__', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'id', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'code', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'name', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'unitPrice', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'createdBy', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'createdAt', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'updateBy', '' . "\0" . 'Data\\Entity\\Product' . "\0" . 'updateAt'];
     }
 
     /**
@@ -252,6 +252,116 @@ class Product extends \Data\Entity\Product implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUnitPrice', []);
 
         return parent::getUnitPrice();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedBy($createdBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedBy', [$createdBy]);
+
+        return parent::setCreatedBy($createdBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedBy', []);
+
+        return parent::getCreatedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedAt($createdAt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedAt', [$createdAt]);
+
+        return parent::setCreatedAt($createdAt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedAt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedAt', []);
+
+        return parent::getCreatedAt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdateBy($updateBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdateBy', [$updateBy]);
+
+        return parent::setUpdateBy($updateBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdateBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdateBy', []);
+
+        return parent::getUpdateBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdateAt($updateAt)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdateAt', [$updateAt]);
+
+        return parent::setUpdateAt($updateAt);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdateAt()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdateAt', []);
+
+        return parent::getUpdateAt();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function created()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'created', []);
+
+        return parent::created();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function updated()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'updated', []);
+
+        return parent::updated();
     }
 
 }

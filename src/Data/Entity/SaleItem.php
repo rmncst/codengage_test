@@ -22,7 +22,7 @@ class SaleItem
      * @ORM\Column(name="id", type="string", length=24, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Data\Common\CustomUUIDGenerator")
+     * @ORM\CustomIdGenerator(class="Data\Common\UUIDGeneratorCommon")
      */
     private $id;
 

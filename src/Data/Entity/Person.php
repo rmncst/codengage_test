@@ -3,6 +3,7 @@
 namespace Data\Entity;
 
 use Data\Common\TraitAudit;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +22,7 @@ class Person
      * @ORM\Column(name="id", type="string", length=24, nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Data\Common\CustomUUIDGenerator")
+     * @ORM\CustomIdGenerator(class="Data\Common\UUIDGeneratorCommon")
      */
     private $id;
 
@@ -39,7 +40,20 @@ class Person
      */
     private $birthDate;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Sale", mappedBy="client")
+     */
+    private $sales;
+
     use TraitAudit;
+
+    public function __construct()
+    {
+        $this->sales = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -187,5 +201,38 @@ class Person
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Add sales
+     *
+     * @param \Data\Entity\Sale $sales
+     * @return Person
+     */
+    public function addSale(\Data\Entity\Sale $sales)
+    {
+        $this->sales[] = $sales;
+
+        return $this;
+    }
+
+    /**
+     * Remove sales
+     *
+     * @param \Data\Entity\Sale $sales
+     */
+    public function removeSale(\Data\Entity\Sale $sales)
+    {
+        $this->sales->removeElement($sales);
+    }
+
+    /**
+     * Get sales
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSales()
+    {
+        return $this->sales;
     }
 }

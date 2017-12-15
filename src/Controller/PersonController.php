@@ -11,8 +11,6 @@ namespace Controller;
 use Data\Entity\Person;
 use Data\Repository\PersonRepository;
 use Pimple\Container;
-use Silex\Application\UrlGeneratorTrait;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Validator\PersonValidator;
 
 class PersonController extends ControllerBase
@@ -55,6 +53,7 @@ class PersonController extends ControllerBase
         if($id == null) {
             $person = new Person();
         } else {
+
             $person = $this->_repo->find($id);
         }
 
@@ -79,6 +78,9 @@ class PersonController extends ControllerBase
             $this->merge($person);
         }
 
+        $this->addSuccessNotification('it Works !');
+
+
         return $this->redirectToRoute('person_index');
     }
 
@@ -91,13 +93,21 @@ class PersonController extends ControllerBase
             return $this->redirectToRoute('person_index');
         }
 
+        if($test->getSales()->count() > 0)
+        {
+            $this->addDangerNotification('Person not deleted. This person has sales !.');
+            return $this->redirectToRoute('person_index');
+        }
+
         $this->remove($test);
+        $this->addSuccessNotification('it Works !');
+
         return $this->redirectToRoute('person_index');
     }
 
     public function edit($id)
     {
-        $personId = $id; // $this->getQueryParam('personId');
+        $personId = $id;
         $test = $this->_repo->find($personId);
 
         if($test == null)

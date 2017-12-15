@@ -149,4 +149,20 @@ class ControllerBase
         return $this->_app->redirect($url);
     }
 
+
+    public function addNotification($type, $message)
+    {
+        $this->_app['session']->getFlashBag()
+            ->add($type, $message);
+    }
+
+    public function addDangerNotification($message)
+    {
+        $this->addNotification('danger',$message);
+    }
+
+    public function addSuccessNotification($message)
+    {
+        $this->addNotification('success',$message);
+    }
 }

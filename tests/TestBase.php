@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-
 use Application\Provider\DoctrineOrmProvider;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
@@ -28,9 +27,4 @@ class TestBase extends TestCase
     }
 
 
-
-    public function testRun()
-    {
-        $this->assertTrue(true);
-    }
 }

@@ -95,9 +95,16 @@ class ProductController extends ControllerBase
     {
         $productId = $id; // $this->getQueryParam('personId');
         $test = $this->_repo->find($productId);
+
         if($test == null)
         {
             return $this->redirectToRoute('product_index');
+        }
+
+        if($test->getSaleItems()->count() > 0)
+        {
+            $this->addDangerNotification('Product not deleted. This product has sale items !.');
+            return $this->redirectToRoute('person_index');
         }
 
         $this->remove($test);

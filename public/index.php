@@ -3,6 +3,7 @@
 require __DIR__."/../vendor/autoload.php";
 
 $app = new Silex\Application();
+
 /**
  * Registrando todos os providers da aplicação
  *

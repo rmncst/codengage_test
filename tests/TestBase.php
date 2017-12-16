@@ -2,9 +2,14 @@
 
 namespace Tests;
 
+use Application\Provider\ApplicationProvider;
 use Application\Provider\DoctrineOrmProvider;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
+use Silex\Application;
+use Silex\WebTestCase;
+use Symfony\Component\HttpKernel\Client;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 
 /**
@@ -27,4 +32,26 @@ class TestBase extends TestCase
     }
 
 
+    public function createApplication()
+    {
+        $app = new Application();
+        $app->register(new ApplicationProvider());
+
+        return $app;
+    }
+
+    public function createClient()
+    {
+        $client = new Client($this->createApplication(), array());
+        return $client;
+    }
+
+    public function testInitialPage()
+    {
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/');
+
+        $this->assertTrue($client->getResponse()->isOk());
+        $this->assertCount(1, $crawler->filter('h1:contains("Menu")'));
+    }
 }

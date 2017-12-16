@@ -29,7 +29,7 @@ class PersonController extends ControllerBase
 
     public function index()
     {
-        return $this->render('person/index', ['persons' => $this->_repo->findAll()]);
+        return $this->render('person/index', ['persons' => $this->_repo->findAll(), 'person' => new Person()]);
     }
 
     public function search()
@@ -47,7 +47,7 @@ class PersonController extends ControllerBase
         }
 
         $post = $this->getPostParams();
-        $id = $this->getQueryParam('id');
+        $id = $this->getPostParam('id');
 
 
         if($id == null) {
@@ -79,8 +79,6 @@ class PersonController extends ControllerBase
         }
 
         $this->addSuccessNotification('it Works !');
-
-
         return $this->redirectToRoute('person_index');
     }
 

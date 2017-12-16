@@ -49,7 +49,7 @@ class ProductController extends ControllerBase
         }
 
         $post = $this->getPostParams();
-        $id = $this->getQueryParam('id');
+        $id = $this->getPostParam('id');
 
         if($id == null) {
             $product = new Product();
@@ -58,6 +58,7 @@ class ProductController extends ControllerBase
         }
 
         $test = $this->_repo->findOneBy(['name' => $post['name']]);
+
         if($test != null)
         {
             if($test->getId() != $id)
@@ -88,6 +89,7 @@ class ProductController extends ControllerBase
             $this->merge($product);
         }
 
+        $this->addSuccessNotification('it Works !');
         return $this->redirectToRoute('product_index');
     }
 
@@ -104,9 +106,10 @@ class ProductController extends ControllerBase
         if($test->getSaleItems()->count() > 0)
         {
             $this->addDangerNotification('Product not deleted. This product has sale items !.');
-            return $this->redirectToRoute('person_index');
+            return $this->redirectToRoute('product_index');
         }
 
+        $this->addSuccessNotification('it Works !');
         $this->remove($test);
         return $this->redirectToRoute('product_index');
     }

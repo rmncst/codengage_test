@@ -27,6 +27,7 @@ class SilexCustomErrorProvider implements ServiceProviderInterface
         });
 
         $app->error(function(\Exception $erro){
+
             return new Response('Oops, erro: '. $erro->getMessage(),500);
         });
     }

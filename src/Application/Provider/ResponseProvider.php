@@ -29,6 +29,7 @@ class ResponseProvider implements ServiceProviderInterface
     public function registerCustomErrors(Application $app)
     {
         $app->error(function (\Exception $e, Request $request, $code) use($app) {
+
             switch ($code) {
                 case 404:
                     $message = 'The requested page could not be found.';

@@ -98,6 +98,7 @@ class SaleController extends ControllerBase
         $this->persist($sale);
 
 
+        $this->addSuccessNotification('it Works !');
         return $this->redirectToRoute('sale_index');
     }
 
@@ -115,6 +116,8 @@ class SaleController extends ControllerBase
             $this->remove($item, false);
         }
 
+
+        $this->addSuccessNotification('it Works !');
         $this->remove($sale);
         return $this->redirectToRoute('sale_list');
     }

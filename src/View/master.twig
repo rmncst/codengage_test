@@ -65,6 +65,24 @@
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
+            {% for alert in app.session.flashbag.get('success') %}
+                <hr>
+                <div class="alert alert-success">
+                    <p class="text-success">
+                        {{ alert }}
+                    </p>
+                </div>
+                <br>
+            {% endfor %}
+            {% for alert in app.session.flashbag.get('danger') %}
+                <hr>
+                <div class="alert alert-danger">
+                    <p class="text-danger">
+                        {{ alert }}
+                    </p>
+                </div>
+                <br>
+            {% endfor %}
 
             {% block content %}
 
@@ -84,24 +102,6 @@
             <!-- /.card -->
 
             {% endblock %}
-            {% for alert in app.session.flashbag.get('success') %}
-                <hr>
-                <div class="alert alert-success">
-                    <p class="text-success">
-                        {{ alert }}
-                    </p>
-                </div>
-                <br>
-            {% endfor %}
-            {% for alert in app.session.flashbag.get('danger') %}
-                <hr>
-                <div class="alert alert-danger">
-                    <p class="text-danger">
-                        {{ alert }}
-                    </p>
-                </div>
-                <br>
-            {% endfor %}
 
         </div>
         <!-- /.col-lg-9 -->

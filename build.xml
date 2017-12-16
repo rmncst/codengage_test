@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SmartNet"  default="build">
+
+    <property name="base.dir.build" value="build" />
+    <property name="cmd.composer" value="composer" />
+    <property name="base.source.dir" value="." />
+    <property name="base.destination.dir" value="/path/to/dir" />
+
+    <fileset dir="." id="base.dir.src">
+        <include name="config/**" />
+        <include name="public/**" />
+        <include name="src/**" />
+    </fileset>
+
+    <!-- ============================================  -->
+    <!-- Target: build                                 -->
+    <!-- ============================================  -->
+    <target name="build">
+        <phingcall target="copy_data" />
+        <phingcall target="composer_update" />
+        <phingcall target="unit_test"/>
+        <phingcall target="deployment" />
+        <phingcall target="clear"/>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Copy Data to BUILD DIRECTORY          -->
+    <!-- ============================================  -->
+    <target name="copy_data">
+        <echo msg="Copying files to build directory..." />
+
+        <copy todir="${base.dir.build}" >
+            <fileset refid="base.dir.src" />
+        </copy>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Clear                                 -->
+    <!-- ============================================  -->
+    <target name="clear" >
+        <echo message="Clear build directory" />
+        <delete dir="build" failonerror="true" />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: PHPUnit                               -->
+    <!-- ============================================  -->
+    <target name="unit_test">
+        <phpunit haltonfailure="true" haltonerror="true" >
+            <formatter type="plain" usefile="false"/>
+            <batchtest>
+                <fileset dir="${base.dir.build}/tests/">
+                    <include name="TestBase.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Composer UPDATE                       -->
+    <!-- ============================================  -->
+    <target name="composer_update">
+        <exec command="${cmd.composer} update --working-dir ${base.dir.build}"  passthru="true" />
+        <exec command="${cmd.composer} dump-autoload --optimize --working-dir ${base.dir.build}" passthru="true" />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: Sync Files Server                     -->
+    <!-- ============================================  -->
+    <target name="deployment" >
+        <filesync sourceDir="${base.dir.build}/"
+                  destinationDir="${base.destination.dir}"
+                  verbose="false"
+                  rsyncPath="/usr/bin/rsync"  />
+    </target>
+
+
+</project>
